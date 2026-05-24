@@ -30,7 +30,8 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
-          rm -f .github/workflows/auto.yml
           git add .
+          git restore --staged .github/workflows/auto.yml || true
+          git checkout HEAD -- .github/workflows/auto.yml || true
           git commit -m "Auto update playlist" || echo "No changes"
           git push --force
